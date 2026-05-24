@@ -10,7 +10,7 @@ from rest_framework import generics, filters
 from django_filters import rest_framework as django_filters
 from rest_framework.pagination import PageNumberPagination
 from .filters import ProductFilter
-
+from rest_framework.permissions import IsAuthenticated
 
 class ReviewViewSet(viewsets.ModelViewSet):
     queryset = Review.objects.all()
@@ -27,6 +27,7 @@ class CustomerPagination(PageNumberPagination):
 
 
 class ProductViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
